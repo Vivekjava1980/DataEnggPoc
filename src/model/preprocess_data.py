@@ -1,5 +1,8 @@
 from textblob import TextBlob
 
+from src.data.collect_data import tweets_df
+
+
 # Function to analyze sentiment
 def analyze_sentiment(text):
     analysis = TextBlob(text)

@@ -1,5 +1,7 @@
 from sqlalchemy import create_engine
 
+from src.data.collect_data import tweets_df
+
 # Create a database connection (using SQLite for POC)
 engine = create_engine('sqlite:///tweets.db', echo=True)
 

@@ -1,5 +1,8 @@
 import re
 
+from src.data.collect_data import tweets_df
+
+
 # Function to clean tweet text
 def clean_text(text):
     text = re.sub(r'http\S+', '', text)  # Remove URLs
