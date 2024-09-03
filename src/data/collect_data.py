@@ -1,6 +1,3 @@
-from src.model import preprocess_data
-from src.load import target
-from src.transform import clean
 
 import tweepy
 import pandas as pd
@@ -16,21 +13,15 @@ BEARER_TOKEN = 'AAAAAAAAAAAAAAAAAAAAAAGpvgEAAAAAMAcjH1llJkZtta8bIC0busgcNU8%3D8a
 auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth, wait_on_rate_limit=True)
-print("Inside twitter to get data")
+
 # Fetch tweets based on a keyword
 
-tweets = tweepy.Cursor(api.search_tweets, q= 'hashtag', lang="en").items(5)
-tweet_data = [[tweet.created_at, tweet.text, tweet.user.screen_name] for tweet in tweets]
-df = pd.DataFrame(tweet_data, columns=['Timestamp', 'Text', 'Username'])
-print("Inside fetch twitts -" + df.info)
-
-def fetch_tweets(keyword, count=100):
-    tweets = tweepy.Cursor(api.search_tweets, q=keyword, lang="en").items(count)
+def fetch_tweets():
+    tweets = tweepy.Cursor(api.search_tweets, q='hashtag', lang="en").items(count)
     tweet_data = [[tweet.created_at, tweet.text, tweet.user.screen_name] for tweet in tweets]
     df = pd.DataFrame(tweet_data, columns=['Timestamp', 'Text', 'Username'])
-    print("Inside fetch twitts -"+df.info)
     return df
 
 # Example: Fetch tweets related to "AI"
-tweets_df = fetch_tweets("AI", count=100)
+tweets_df = fetch_tweets()
 print(tweets_df.head())
